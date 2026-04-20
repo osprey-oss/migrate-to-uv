@@ -6,6 +6,19 @@
 
 `migrate-to-uv` migrates a project to [uv](https://github.com/astral-sh/uv) from another package manager.
 
+## Installation
+
+```bash
+# To install and build from Rust source code:
+cargo install --git https://github.com/mkniewallner/migrate-to-uv
+
+# If you don't want to build from source, install it as a PyPI package, either with
+pip install migrate-to-uv
+
+# or with
+uv tool install migrate-to-uv
+```
+
 ## Usage
 
 ```bash
