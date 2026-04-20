@@ -10,7 +10,7 @@
 
 ```bash
 # To install and build from Rust source code:
-cargo install --git https://github.com/mkniewallner/migrate-to-uv
+cargo install --git https://github.com/osprey-oss/migrate-to-uv
 
 # If you don't want to build from source, install it as a PyPI package, either with
 pipx install migrate-to-uv
