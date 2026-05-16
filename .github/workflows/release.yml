@@ -7,7 +7,7 @@ on:
 
 env:
   # renovate: datasource=crate depName=maturin
-  MATURIN_VERSION: '1.12.2'
+  MATURIN_VERSION: '1.13.1'
   # renovate: datasource=pypi depName=pypi-attestations
   PYPI_ATTESTATIONS_VERSION: '0.0.29'
 
