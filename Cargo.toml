@@ -30,7 +30,7 @@ flate2 = "=1.1.9"
 insta = { version = "=1.47.2", features = ["filters"] }
 insta-cmd = "=0.6.0"
 rstest = "=0.26.1"
-tar = "=0.4.45"
+tar = "=0.4.46"
 tempfile = "=3.27.0"
 walkdir = "=2.5.0"
 zip = "=8.5.1"
