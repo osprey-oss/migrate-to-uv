@@ -33,7 +33,7 @@ rstest = "=0.26.1"
 tar = "=0.4.46"
 tempfile = "=3.27.0"
 walkdir = "=2.5.0"
-zip = "=8.5.1"
+zip = "=8.6.0"
 
 [lints.clippy]
 pedantic = { level = "warn", priority = -1 }
