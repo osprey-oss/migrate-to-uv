@@ -118,7 +118,7 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
         with:
-          version: '0.11.14'
+          version: '0.11.24'
 
       - name: Generate PyPI attestations
         run: uvx pypi-attestations@${{ env.PYPI_ATTESTATIONS_VERSION }} sign wheels-*/*
@@ -145,7 +145,7 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
         with:
-          version: '0.11.14'
+          version: '0.11.24'
 
       - name: Install Python
         uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
