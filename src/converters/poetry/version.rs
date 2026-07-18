@@ -163,14 +163,14 @@ impl FromStr for PoetryPep440 {
 
                 match (chars.next(), chars.as_str()) {
                     (Some('*'), "") => pep_440_specifier.push(Self::String(String::new())),
-                    (Some('^'), version) => match Self::from_caret(version.trim()) {
-                        Ok(v) => pep_440_specifier.push(v),
-                        Err(e) => return Err(e),
-                    },
-                    (Some('~'), version) => match Self::from_tilde(version.trim()) {
-                        Ok(v) => pep_440_specifier.push(v),
-                        Err(e) => return Err(e),
-                    },
+                    (Some('^'), version) => {
+                        let v = Self::from_caret(version.trim())?;
+                        pep_440_specifier.push(v);
+                    }
+                    (Some('~'), version) => {
+                        let v = Self::from_tilde(version.trim())?;
+                        pep_440_specifier.push(v);
+                    }
                     (Some('='), version) => {
                         pep_440_specifier.push(Self::String(format!("=={version}")));
                     }
