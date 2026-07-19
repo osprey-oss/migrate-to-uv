@@ -6,6 +6,16 @@
 
 `migrate-to-uv` migrates a project to [uv](https://github.com/astral-sh/uv) from another package manager.
 
+## Usage
+
+```bash
+# With uv
+uvx migrate-to-uv
+
+# With pipx
+pipx run migrate-to-uv
+```
+
 ## Installation
 
 ```bash
@@ -17,16 +27,6 @@ pipx install migrate-to-uv
 
 # or with
 uv tool install migrate-to-uv
-```
-
-## Usage
-
-```bash
-# With uv
-uvx migrate-to-uv
-
-# With pipx
-pipx run migrate-to-uv
 ```
 
 ## Supported package managers
