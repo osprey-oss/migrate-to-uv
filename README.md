@@ -16,6 +16,19 @@ uvx migrate-to-uv
 pipx run migrate-to-uv
 ```
 
+## Installation
+
+```bash
+# To install migrate-to-uv as a PyPI package, run either
+uv tool install migrate-to-uv
+
+# ...or
+pipx install migrate-to-uv
+
+# And in case you need to build from Rust source code yourself, then go with
+cargo install --git https://github.com/osprey-oss/migrate-to-uv
+```
+
 ## Supported package managers
 
 The following package managers are supported:
