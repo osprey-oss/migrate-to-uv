@@ -19,14 +19,14 @@ pipx run migrate-to-uv
 ## Installation
 
 ```bash
-# To install and build from Rust source code:
-cargo install --git https://github.com/osprey-oss/migrate-to-uv
+# To install migrate-to-uv as a PyPI package, run either
+uv tool install migrate-to-uv
 
-# If you don't want to build from source, install it as a PyPI package, either with
+# ...or
 pipx install migrate-to-uv
 
-# or with
-uv tool install migrate-to-uv
+# And in case you need to build from Rust source code yourself, then go with
+cargo install --git https://github.com/osprey-oss/migrate-to-uv
 ```
 
 ## Supported package managers
