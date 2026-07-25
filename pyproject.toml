@@ -42,7 +42,7 @@ Changelog = "https://github.com/osprey-oss/migrate-to-uv/blob/main/CHANGELOG.md"
 Funding = "https://github.com/sponsors/mkniewallner"
 
 [dependency-groups]
-docs = ["zensical==0.0.50; python_version >= '3.10'"]
+docs = ["zensical==0.0.51; python_version >= '3.10'"]
 
 [tool.maturin]
 bindings = "bin"
