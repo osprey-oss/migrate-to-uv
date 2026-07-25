@@ -16,7 +16,7 @@ log = "=0.4.33"
 owo-colors = "=4.3.0"
 pep440_rs = "=0.7.3"
 pep508_rs = "=0.9.2"
-regex = "=1.13.0"
+regex = "=1.13.1"
 serde = { version = "=1.0.228", features = ["derive"] }
 serde_json = "=1.0.150"
 toml = { version = "=1.1.2", features = ["preserve_order"] }
