@@ -2,9 +2,9 @@ mod dependencies;
 mod project;
 mod sources;
 
-use crate::converters::Converter;
 use crate::converters::ConverterOptions;
 use crate::converters::pyproject_updater::PyprojectUpdater;
+use crate::converters::{Converter, DEFAULT_PROJECT_NAME};
 use crate::errors::add_recoverable_error;
 use crate::schema::pep_621::Project;
 use crate::schema::pipenv::{PipenvLock, Pipfile};
@@ -41,8 +41,8 @@ impl Converter for Pipenv {
             );
 
         let project = Project {
-            // "name" is required by uv.
-            name: Some(String::new()),
+            // "name" is required by uv, and must not be empty.
+            name: Some(DEFAULT_PROJECT_NAME.to_string()),
             requires_python: project::get_requires_python(pipfile.requires),
             dependencies: dependencies::get(pipfile.packages.as_ref(), &mut uv_source_index),
             ..Default::default()
@@ -159,15 +159,15 @@ mod tests {
             },
         };
 
-        insta::assert_snapshot!(pipenv.build_uv_pyproject(), @r###"
+        insta::assert_snapshot!(pipenv.build_uv_pyproject(), @r#"
         [project]
-        name = ""
+        name = "project"
         version = "0.0.1"
         requires-python = "==3.13.1"
 
         [tool.uv]
         package = false
-        "###);
+        "#);
     }
 
     #[test]
@@ -190,14 +190,14 @@ mod tests {
             },
         };
 
-        insta::assert_snapshot!(pipenv.build_uv_pyproject(), @r###"
+        insta::assert_snapshot!(pipenv.build_uv_pyproject(), @r#"
         [project]
-        name = ""
+        name = "project"
         version = "0.0.1"
 
         [tool.uv]
         package = false
-        "###);
+        "#);
     }
 
     #[test]
@@ -234,15 +234,15 @@ mod tests {
             },
         };
 
-        insta::assert_snapshot!(pipenv.build_uv_pyproject(), @r###"
+        insta::assert_snapshot!(pipenv.build_uv_pyproject(), @r#"
         [project]
-        name = ""
+        name = "project"
         dependencies = ["foo==1.2.3"]
         dynamic = ["version"]
 
         [tool.uv]
         package = false
-        "###);
+        "#);
     }
 
     #[test]
@@ -279,15 +279,15 @@ mod tests {
             },
         };
 
-        insta::assert_snapshot!(pipenv.build_uv_pyproject(), @r###"
+        insta::assert_snapshot!(pipenv.build_uv_pyproject(), @r#"
         [project]
-        name = ""
+        name = "project"
         version = "0.0.1"
         dependencies = ["foo==1.2.3"]
 
         [tool.uv]
         package = false
-        "###);
+        "#);
     }
 
     #[test]
@@ -322,7 +322,7 @@ foobar = "1.2.3"
 
         insta::assert_snapshot!(pipenv.build_uv_pyproject(), @r#"
         [project]
-        name = ""
+        name = "project"
         version = "0.0.1"
         dependencies = ["foo==1.2.3"]
 
@@ -367,7 +367,7 @@ foobar = "1.2.3"
 
         insta::assert_snapshot!(pipenv.build_uv_pyproject(), @r#"
         [project]
-        name = ""
+        name = "project"
         version = "0.0.1"
         dependencies = ["foo==1.2.3"]
 
@@ -413,7 +413,7 @@ foobar = "1.2.3"
 
         insta::assert_snapshot!(pipenv.build_uv_pyproject(), @r#"
         [project]
-        name = ""
+        name = "project"
         version = "0.0.1"
         dependencies = ["foo==1.2.3"]
 
@@ -462,7 +462,7 @@ foobar = "1.2.3"
 
         insta::assert_snapshot!(pipenv.build_uv_pyproject(), @r#"
         [project]
-        name = ""
+        name = "project"
         version = "0.0.1"
         dependencies = ["foo==1.2.3"]
 
@@ -510,7 +510,7 @@ foobar = "1.2.3"
 
         insta::assert_snapshot!(pipenv.build_uv_pyproject(), @r#"
         [project]
-        name = ""
+        name = "project"
         version = "0.0.1"
         dependencies = ["foo==1.2.3"]
 
@@ -555,7 +555,7 @@ foobar = "1.2.3"
 
         insta::assert_snapshot!(pipenv.build_uv_pyproject(), @r#"
         [project]
-        name = ""
+        name = "project"
         version = "0.0.1"
         dependencies = ["foo==1.2.3"]
 

@@ -26,7 +26,7 @@ fn test_revert_changes_no_pyproject() {
 
     ----- stderr -----
     Locking dependencies with constraints from existing lock file(s) using "uv lock"...
-    warning: The `requires-python` specifier (`~=3.13`) in `` uses the tilde specifier (`~=`) without a patch version. This will be interpreted as `>=3.13, <4`. Did you mean `~=3.13.0` to constrain the version as `>=3.13.0, <3.14`? We recommend only using the tilde specifier with a patch version to avoid ambiguity.
+    warning: The `requires-python` specifier (`~=3.13`) in `project` uses the tilde specifier (`~=`) without a patch version. This will be interpreted as `>=3.13, <4`. Did you mean `~=3.13.0` to constrain the version as `>=3.13.0, <3.14`? We recommend only using the tilde specifier with a patch version to avoid ambiguity.
     Using [PYTHON_INTERPRETER]
       × No solution found when resolving dependencies:
       ╰─▶ Because there is no version of certifi==2026.1.1 and requests==2.30.0
@@ -64,7 +64,7 @@ fn test_revert_changes_existing_pyproject() {
 
     ----- stderr -----
     Locking dependencies with constraints from existing lock file(s) using "uv lock"...
-    warning: The `requires-python` specifier (`~=3.13`) in `` uses the tilde specifier (`~=`) without a patch version. This will be interpreted as `>=3.13, <4`. Did you mean `~=3.13.0` to constrain the version as `>=3.13.0, <3.14`? We recommend only using the tilde specifier with a patch version to avoid ambiguity.
+    warning: The `requires-python` specifier (`~=3.13`) in `project` uses the tilde specifier (`~=`) without a patch version. This will be interpreted as `>=3.13, <4`. Did you mean `~=3.13.0` to constrain the version as `>=3.13.0, <3.14`? We recommend only using the tilde specifier with a patch version to avoid ambiguity.
     Using [PYTHON_INTERPRETER]
       × No solution found when resolving dependencies:
       ╰─▶ Because there is no version of certifi==2026.1.1 and requests==2.30.0

@@ -27,6 +27,9 @@ type DependencyGroupsAndDefaultGroups = (
     Option<SingleOrVec<String>>,
 );
 
+// Default project name to use in `[project.name]` when it couldn't be determined.
+const DEFAULT_PROJECT_NAME: &str = "project";
+
 #[derive(Debug, PartialEq, Eq, Clone, Default)]
 #[allow(clippy::struct_excessive_bools)]
 pub struct ConverterOptions {

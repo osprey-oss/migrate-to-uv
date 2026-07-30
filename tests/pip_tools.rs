@@ -49,9 +49,9 @@ fn test_complete_workflow() {
     Successfully migrated project from pip-tools to uv!
     "#);
 
-    insta::assert_snapshot!(fs::read_to_string(project_path.join("pyproject.toml")).unwrap(), @r###"
+    insta::assert_snapshot!(fs::read_to_string(project_path.join("pyproject.toml")).unwrap(), @r#"
     [project]
-    name = ""
+    name = "project"
     version = "0.0.1"
     dependencies = ["arrow>=1.2.3"]
 
@@ -63,7 +63,7 @@ fn test_complete_workflow() {
 
     [tool.uv]
     package = false
-    "###);
+    "#);
 
     let uv_lock = toml::from_str::<UvLock>(
         fs::read_to_string(project_path.join("uv.lock"))
@@ -76,7 +76,7 @@ fn test_complete_workflow() {
     let uv_lock_packages = uv_lock.package.unwrap();
     let expected_locked_packages = Vec::from([
         LockedPackage {
-            name: String::new(),
+            name: "project".to_string(),
             version: "0.0.1".to_string(),
         },
         LockedPackage {
@@ -159,9 +159,9 @@ fn test_ignore_locked_versions() {
     Successfully migrated project from pip-tools to uv!
     "#);
 
-    insta::assert_snapshot!(fs::read_to_string(project_path.join("pyproject.toml")).unwrap(), @r###"
+    insta::assert_snapshot!(fs::read_to_string(project_path.join("pyproject.toml")).unwrap(), @r#"
     [project]
-    name = ""
+    name = "project"
     version = "0.0.1"
     dependencies = ["arrow>=1.2.3"]
 
@@ -173,7 +173,7 @@ fn test_ignore_locked_versions() {
 
     [tool.uv]
     package = false
-    "###);
+    "#);
 
     let uv_lock = toml::from_str::<UvLock>(
         fs::read_to_string(project_path.join("uv.lock"))
@@ -243,9 +243,9 @@ fn test_keep_current_data() {
     Successfully migrated project from pip-tools to uv!
     "#);
 
-    insta::assert_snapshot!(fs::read_to_string(project_path.join("pyproject.toml")).unwrap(), @r###"
+    insta::assert_snapshot!(fs::read_to_string(project_path.join("pyproject.toml")).unwrap(), @r#"
     [project]
-    name = ""
+    name = "project"
     version = "0.0.1"
     dependencies = ["arrow>=1.2.3"]
 
@@ -257,7 +257,7 @@ fn test_keep_current_data() {
 
     [tool.uv]
     package = false
-    "###);
+    "#);
 
     // Assert that previous package manager files have not been removed.
     for file in requirements_files {
@@ -297,9 +297,9 @@ fn test_skip_lock() {
     Successfully migrated project from pip-tools to uv!
     "###);
 
-    insta::assert_snapshot!(fs::read_to_string(project_path.join("pyproject.toml")).unwrap(), @r###"
+    insta::assert_snapshot!(fs::read_to_string(project_path.join("pyproject.toml")).unwrap(), @r#"
     [project]
-    name = ""
+    name = "project"
     version = "0.0.1"
     dependencies = ["arrow>=1.2.3"]
 
@@ -311,7 +311,7 @@ fn test_skip_lock() {
 
     [tool.uv]
     package = false
-    "###);
+    "#);
 
     // Assert that previous package manager files are correctly removed.
     for file in requirements_files {
@@ -354,9 +354,9 @@ fn test_skip_lock_full() {
     Successfully migrated project from pip-tools to uv!
     "###);
 
-    insta::assert_snapshot!(fs::read_to_string(project_path.join("pyproject.toml")).unwrap(), @r###"
+    insta::assert_snapshot!(fs::read_to_string(project_path.join("pyproject.toml")).unwrap(), @r#"
     [project]
-    name = ""
+    name = "project"
     version = "0.0.1"
     dependencies = [
         "arrow",
@@ -374,7 +374,7 @@ fn test_skip_lock_full() {
 
     [tool.uv]
     package = false
-    "###);
+    "#);
 
     // Assert that previous package manager files are correctly removed.
     for file in requirements_files {
@@ -403,7 +403,7 @@ fn test_dry_run() {
         .arg("requirements-dev.in")
         .arg("--dev-requirements-file")
         .arg("requirements-typing.in")
-        .arg("--dry-run"), @r###"
+        .arg("--dry-run"), @r#"
     success: true
     exit_code: 0
     ----- stdout -----
@@ -411,7 +411,7 @@ fn test_dry_run() {
     ----- stderr -----
     Migrated pyproject.toml:
     [project]
-    name = ""
+    name = "project"
     version = "0.0.1"
     dependencies = ["arrow>=1.2.3"]
 
@@ -423,7 +423,7 @@ fn test_dry_run() {
 
     [tool.uv]
     package = false
-    "###);
+    "#);
 
     // Assert that previous package manager files have not been removed.
     for file in requirements_files {
@@ -466,7 +466,7 @@ fn test_replaces_existing_project() {
     assert_cmd_snapshot!(cli()
         .arg(&project_path)
         .arg("--dry-run")
-        .arg("--replace-project-section"), @r###"
+        .arg("--replace-project-section"), @r#"
     success: true
     exit_code: 0
     ----- stdout -----
@@ -474,11 +474,11 @@ fn test_replaces_existing_project() {
     ----- stderr -----
     Migrated pyproject.toml:
     [project]
-    name = ""
+    name = "project"
     version = "0.0.1"
     dependencies = ["arrow>=1.2.3"]
 
     [tool.uv]
     package = false
-    "###);
+    "#);
 }

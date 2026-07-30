@@ -38,7 +38,7 @@ fn test_complete_workflow() {
 
     insta::assert_snapshot!(fs::read_to_string(project_path.join("pyproject.toml")).unwrap(), @r#"
     [project]
-    name = ""
+    name = "project"
     version = "0.0.1"
     dependencies = ["arrow>=1.2.3"]
 
@@ -66,7 +66,7 @@ fn test_complete_workflow() {
     let uv_lock_packages = uv_lock.package.unwrap();
     let expected_locked_packages = Vec::from([
         LockedPackage {
-            name: String::new(),
+            name: "project".to_string(),
             version: "0.0.1".to_string(),
         },
         LockedPackage {
@@ -136,7 +136,7 @@ fn test_ignore_locked_versions() {
 
     insta::assert_snapshot!(fs::read_to_string(project_path.join("pyproject.toml")).unwrap(), @r#"
     [project]
-    name = ""
+    name = "project"
     version = "0.0.1"
     dependencies = ["arrow>=1.2.3"]
 
@@ -208,7 +208,7 @@ fn test_keep_current_data() {
 
     insta::assert_snapshot!(fs::read_to_string(project_path.join("pyproject.toml")).unwrap(), @r#"
     [project]
-    name = ""
+    name = "project"
     version = "0.0.1"
     dependencies = ["arrow>=1.2.3"]
 
@@ -250,7 +250,7 @@ fn test_skip_lock() {
 
     insta::assert_snapshot!(fs::read_to_string(project_path.join("pyproject.toml")).unwrap(), @r#"
     [project]
-    name = ""
+    name = "project"
     version = "0.0.1"
     dependencies = ["arrow>=1.2.3"]
 
@@ -295,7 +295,7 @@ fn test_skip_lock_full() {
 
     insta::assert_snapshot!(fs::read_to_string(project_path.join("pyproject.toml")).unwrap(), @r#"
     [project]
-    name = ""
+    name = "project"
     version = "0.0.1"
     requires-python = "~=3.13"
     dependencies = [
@@ -384,7 +384,7 @@ fn test_dry_run() {
     ----- stderr -----
     Migrated pyproject.toml:
     [project]
-    name = ""
+    name = "project"
     version = "0.0.1"
     dependencies = ["arrow>=1.2.3"]
 
@@ -416,7 +416,7 @@ fn test_dry_run() {
 fn test_dry_run_minimal() {
     let project_path = Path::new(FIXTURES_PATH).join("minimal");
 
-    assert_cmd_snapshot!(cli().arg(&project_path).arg("--dry-run"), @r###"
+    assert_cmd_snapshot!(cli().arg(&project_path).arg("--dry-run"), @r#"
     success: true
     exit_code: 0
     ----- stdout -----
@@ -424,12 +424,12 @@ fn test_dry_run_minimal() {
     ----- stderr -----
     Migrated pyproject.toml:
     [project]
-    name = ""
+    name = "project"
     version = "0.0.1"
 
     [tool.uv]
     package = false
-    "###);
+    "#);
 
     // Assert that previous package manager files have not been removed.
     assert!(project_path.join("Pipfile").exists());
@@ -487,7 +487,7 @@ fn test_replaces_existing_project() {
     ----- stderr -----
     Migrated pyproject.toml:
     [project]
-    name = ""
+    name = "project"
     version = "0.0.1"
     requires-python = "~=3.13"
     dependencies = ["arrow>=1.2.3"]
