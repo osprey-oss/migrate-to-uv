@@ -1,8 +1,8 @@
 mod dependencies;
 
-use crate::converters::Converter;
 use crate::converters::ConverterOptions;
 use crate::converters::pyproject_updater::PyprojectUpdater;
+use crate::converters::{Converter, DEFAULT_PROJECT_NAME};
 use crate::schema::pep_621::Project;
 use crate::schema::pyproject::{DependencyGroupSpecification, PyProject};
 use crate::schema::uv::Uv;
@@ -43,8 +43,8 @@ impl Converter for Pip {
         });
 
         let project = Project {
-            // "name" is required by uv.
-            name: Some(String::new()),
+            // "name" is required by uv, and must not be empty.
+            name: Some(DEFAULT_PROJECT_NAME.to_string()),
             dependencies: dependencies::get(
                 &self.get_project_path(),
                 self.requirements_files.clone(),
@@ -183,15 +183,15 @@ mod tests {
             is_pip_tools: false,
         };
 
-        insta::assert_snapshot!(pipenv.build_uv_pyproject(), @r###"
+        insta::assert_snapshot!(pipenv.build_uv_pyproject(), @r#"
         [project]
-        name = ""
+        name = "project"
         dependencies = ["foo==1.2.3"]
         dynamic = ["version"]
 
         [tool.uv]
         package = false
-        "###);
+        "#);
     }
 
     #[test]
@@ -230,14 +230,14 @@ mod tests {
             is_pip_tools: false,
         };
 
-        insta::assert_snapshot!(pipenv.build_uv_pyproject(), @r###"
+        insta::assert_snapshot!(pipenv.build_uv_pyproject(), @r#"
         [project]
-        name = ""
+        name = "project"
         version = "0.0.1"
         dependencies = ["foo==1.2.3"]
 
         [tool.uv]
         package = false
-        "###);
+        "#);
     }
 }

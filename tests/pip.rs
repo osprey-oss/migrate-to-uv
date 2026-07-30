@@ -51,7 +51,7 @@ fn test_complete_workflow() {
 
     insta::assert_snapshot!(fs::read_to_string(project_path.join("pyproject.toml")).unwrap(), @r#"
     [project]
-    name = ""
+    name = "project"
     version = "0.0.1"
     dependencies = [
         "arrow==1.3.0",
@@ -123,7 +123,7 @@ fn test_keep_current_data() {
 
     insta::assert_snapshot!(fs::read_to_string(project_path.join("pyproject.toml")).unwrap(), @r#"
     [project]
-    name = ""
+    name = "project"
     version = "0.0.1"
     dependencies = [
         "arrow==1.3.0",
@@ -188,7 +188,7 @@ fn test_skip_lock() {
 
     insta::assert_snapshot!(fs::read_to_string(project_path.join("pyproject.toml")).unwrap(), @r#"
     [project]
-    name = ""
+    name = "project"
     version = "0.0.1"
     dependencies = [
         "arrow==1.3.0",
@@ -243,7 +243,7 @@ fn test_dry_run() {
     ----- stderr -----
     Migrated pyproject.toml:
     [project]
-    name = ""
+    name = "project"
     version = "0.0.1"
     dependencies = [
         "arrow==1.3.0",
@@ -316,7 +316,7 @@ fn test_replaces_existing_project() {
     assert_cmd_snapshot!(cli()
         .arg(&project_path)
         .arg("--dry-run")
-        .arg("--replace-project-section"), @r###"
+        .arg("--replace-project-section"), @r#"
     success: true
     exit_code: 0
     ----- stdout -----
@@ -324,7 +324,7 @@ fn test_replaces_existing_project() {
     ----- stderr -----
     Migrated pyproject.toml:
     [project]
-    name = ""
+    name = "project"
     version = "0.0.1"
     dependencies = [
         "arrow==1.3.0",
@@ -334,5 +334,5 @@ fn test_replaces_existing_project() {
 
     [tool.uv]
     package = false
-    "###);
+    "#);
 }

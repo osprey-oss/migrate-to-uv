@@ -4,11 +4,11 @@ mod project;
 mod sources;
 pub mod version;
 
-use crate::converters::Converter;
 use crate::converters::ConverterOptions;
 use crate::converters::poetry::build_backend::{BuildBackendObject, get_build_backend};
 use crate::converters::poetry::project::get_classifiers;
 use crate::converters::pyproject_updater::PyprojectUpdater;
+use crate::converters::{Converter, DEFAULT_PROJECT_NAME};
 use crate::errors::{
     MIGRATION_ERRORS, MigrationError, add_recoverable_error, add_unrecoverable_error,
 };
@@ -85,8 +85,8 @@ impl Converter for Poetry {
             .and_then(|plugins| plugins.shift_remove("gui_scripts"));
 
         let project = Project {
-            // "name" is required by uv.
-            name: Some(poetry.name.unwrap_or_default()),
+            // "name" is required by uv, and must not be empty.
+            name: Some(poetry.name.unwrap_or(DEFAULT_PROJECT_NAME.to_string())),
             description: poetry.description,
             authors: project::get_authors(poetry.authors),
             requires_python: requires_python.clone(),
@@ -295,7 +295,7 @@ mod tests {
 
         insta::assert_snapshot!(poetry.build_uv_pyproject(), @r#"
         [project]
-        name = ""
+        name = "project"
         version = "0.0.1"
         "#);
     }
@@ -330,7 +330,7 @@ mod tests {
 
         insta::assert_snapshot!(poetry.build_uv_pyproject(), @r#"
         [project]
-        name = ""
+        name = "project"
         version = "0.0.1"
         requires-python = ">=3.12,<4"
         license = { text = "MIT" }
@@ -367,7 +367,7 @@ mod tests {
 
         insta::assert_snapshot!(poetry.build_uv_pyproject(), @r#"
         [project]
-        name = ""
+        name = "project"
         version = "0.0.1"
         requires-python = ">=3.12,<4"
         license = { file = "LICENSE" }
@@ -551,7 +551,7 @@ build-backend = "poetry.core.masonry.api"
         build-backend = "uv_build"
 
         [project]
-        name = ""
+        name = "project"
         version = "0.0.1"
         classifiers = [
             "Programming Language :: Python :: 2",
@@ -608,7 +608,7 @@ python = "^3.10"
         build-backend = "uv_build"
 
         [project]
-        name = ""
+        name = "project"
         version = "0.0.1"
         requires-python = ">=3.10,<4"
         classifiers = [
@@ -658,7 +658,7 @@ python = ">=3.2,<3.13"
         build-backend = "uv_build"
 
         [project]
-        name = ""
+        name = "project"
         version = "0.0.1"
         requires-python = ">=3.2,<3.13"
         classifiers = [
@@ -712,7 +712,7 @@ python = ">=2.6"
         build-backend = "uv_build"
 
         [project]
-        name = ""
+        name = "project"
         version = "0.0.1"
         requires-python = ">=2.6"
         classifiers = [
@@ -778,7 +778,7 @@ python = ">=3.10"
         build-backend = "uv_build"
 
         [project]
-        name = ""
+        name = "project"
         version = "0.0.1"
         requires-python = ">=3.10"
         classifiers = [
@@ -854,7 +854,7 @@ build-backend = "bar"
 
         insta::assert_snapshot!(poetry.build_uv_pyproject(), @r#"
         [project]
-        name = ""
+        name = "project"
         version = "0.0.1"
 
 
@@ -957,7 +957,7 @@ requires-python = ">=3.10"
         build-backend = "uv_build"
 
         [project]
-        name = ""
+        name = "project"
         version = "0.0.1"
         requires-python = ">=3.10"
         classifiers = [
@@ -1012,7 +1012,7 @@ classifiers = [
         build-backend = "uv_build"
 
         [project]
-        name = ""
+        name = "project"
         version = "0.0.1"
         classifiers = [
             "Intended Audience :: Developers",
