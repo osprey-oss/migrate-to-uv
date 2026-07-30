@@ -19,7 +19,7 @@ pub mod uv;
 /// backend (<https://github.com/astral-sh/uv/releases/tag/0.7.19>).
 const MIN_UV_BUILD_VERSION: &str = "0.7.19";
 /// Default bounds to use for `uv_build` when no version is found.
-const UV_BUILD_DEFAULT_BOUNDS: &str = ">=0.10.0,<0.11.0";
+const UV_BUILD_DEFAULT_BOUNDS: &str = ">=0.12.0,<0.13";
 
 pub enum BuildBackendObject {
     Uv(UvBuildBackend),
