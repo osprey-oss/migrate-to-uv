@@ -19,5 +19,14 @@
       matchPackageNames: ["pnpm"],
       extends: [":automergeMinor"],
     },
+    {
+      matchDatasources: ["crate"],
+      separateMinorPatch: true,
+    },
+    {
+      matchDatasources: ["crate"],
+      matchUpdateTypes: ["patch"],
+      groupName: "rust patch dependencies",
+    },
   ],
 }
