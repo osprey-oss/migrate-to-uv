@@ -12,7 +12,7 @@ concurrency:
 
 env:
   # renovate: datasource=pypi depName=zizmor
-  ZIZMOR_VERSION: '1.28.0'
+  ZIZMOR_VERSION: '1.29.0'
 
 permissions: {}
 
