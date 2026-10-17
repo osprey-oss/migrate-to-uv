@@ -34,7 +34,7 @@ jobs:
           args: --release --out dist
 
       - name: Upload wheels
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: wheels-linux-${{ matrix.target }}-${{ matrix.manylinux }}
           path: dist
@@ -57,7 +57,7 @@ jobs:
           args: --release --out dist
 
       - name: Upload wheels
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: wheels-windows-${{ matrix.target }}
           path: dist
@@ -80,7 +80,7 @@ jobs:
           args: --release --out dist
 
       - name: Upload wheels
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: wheels-macos-${{ matrix.target }}
           path: dist
@@ -100,7 +100,7 @@ jobs:
           args: --out dist
 
       - name: Upload sdist
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: wheels-sdist
           path: dist
